@@ -18,7 +18,7 @@ require_once 'functions/init.php' ?>
 
     <div class="row">
         <div class="small-12 columns">
-            <?php include 'includes/threads/init.php'; ?>
+            <?php include 'includes/threads/init.php'; >
         </div>
     </div>
 </body>

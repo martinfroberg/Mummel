@@ -1,0 +1,139 @@
+.dim-background {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: auto;
+  width: auto;
+  background-color: #000;
+  opacity: 0.6;
+  z-index: 1001;
+}
+.modal-login, .modal-register {
+  z-index: 1002;
+  opacity: 1;
+  position: absolute;
+  box-shadow: 10px 10px 5px #888888;
+  border: 1px solid #000;
+  display: none;
+  background-color: #FFF;
+}
+
+#login_response, #registration_response{
+    display: none;
+}
+
+
+.body {
+
+}
+
+.title-bar {
+    background: #333;
+}
+
+.top-bar {
+    background: #333;
+}
+
+.top-bar ul {
+    background: #333;
+}
+
+.top-bar ul li {
+    background: #333;
+}
+
+.top-bar ul li a {
+    color: #fff;
+}
+
+.menu-text {
+    color: #fff !important;
+}
+
+@media only screen and (max-width: 40em) {
+    .menu-text {
+        display: none !important;
+    }
+}
+
+@media only screen and (min-width: 40em) {
+    .top-bar .menu:last-child {
+        border-left: 1px solid #4e4e4e;
+    }
+    .top-bar .menu:first-child {
+        border-left: none;
+    }
+    .top-bar .menu li:not(:last-child) {
+        border-right: 1px solid #4e4e4e;
+    }
+}
+
+.dropdown.menu .submenu {
+    border: none;
+}
+
+.dropdown.menu .is-dropdown-submenu-parent.is-right-arrow > a::after {
+    border-color: #fff transparent transparent;
+}
+
+.is-drilldown-submenu-parent > a::after {
+    border-color: transparent transparent transparent #fff;
+}
+
+.js-drilldown-back::before {
+    border-color: transparent #fff transparent transparent;
+}
+
+.log-in-form {
+    border: 1px solid #cacaca;
+    padding: 1rem;
+    border-radius: 3px;
+    margin-top: 50px;
+}
+
+.right-bar {
+    margin-top: 5px;
+    width: 200px;
+    position: fixed;
+    right:0;
+    height: auto;
+    background: #333;
+
+}
+
+.right-bar ul {
+    color: white;
+    border-style: none;
+    border-bottom-color: pink;
+    padding-top: 30px;
+}
+
+.threads-container {
+    background-color: pink;
+}
+
+.thread {
+    height: auto;
+    width: 100%;
+    background-color: #007BD8;
+    border: 1px solid black;
+    margin-top: 5px;
+}
+
+.thread p {
+    margin: 5px;
+    color: black;
+    font-family: verdana;
+    font-size: 20px;
+}
+
+.comments-container {
+  background-color: #FFF;
+}
+
+.row{
+    float: left;
+}

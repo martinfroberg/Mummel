@@ -10,12 +10,9 @@ $(document).ready(function(){
             if( $('#' + id + '.comments-container').length ){
                 $('#' + id + '.comments-container').remove();
             } else {
-                $('#' + id).after("<div id='" + id + "' class='comments-container'></div>");
+                $('#' + id).append("<div id='" + id + "' class='comments-container'></div>");
                 $('#' + id + '.comments-container').html(comments);
             }
         }});
     });
-
-
-
 });

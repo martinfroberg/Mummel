@@ -61,7 +61,7 @@ $(document).ready(function(){
 
         $.ajax({
             type: "POST",
-            url: "./functions/forum/replies.php",
+            url: "./functions/forum/comments.php",
             data: $('#reply_form').serialize(),
             success: function(msg) {
                 $(document).ajaxComplete(function(event, request, settnings){

@@ -7,6 +7,8 @@ if (isset($_POST['get_thread_comments'])){
     if ($comments === false) {
         echo SELECT_FROM_DATABASE_FAILURE;
     } else {
+        echo '<a id="reply" class="open-modal">Reply to thread</a>';
+        echo '<br>';
         if (! $children = find_child_comments(0, $comments)){
             echo NO_COMMENTS;
         } else {
@@ -17,12 +19,12 @@ if (isset($_POST['get_thread_comments'])){
     echo INVALID_POST_REQUEST;
 }
 
-function print_comments($comment_id, $array){
-    $children = find_child_comments($comment_id,$array);
+function print_comments($parent_id, $array){
+    $children = find_child_comments($parent_id,$array);
     if(! empty($children)){
         echo '<ul>';
         for ($i=0; $i < count($children); $i++) {
-            echo '<li>' . $array[$children[0]]['text'] . '</li>';
+            echo '<li id="' . $parent_id . '">' . $array[$children[0]]['text'] . '</li>';
 
             print_comments($array[$children[0]]['id'], $array);
 

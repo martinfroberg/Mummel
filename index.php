@@ -10,7 +10,7 @@ require_once 'functions/init.php' ?>
     <link rel="stylesheet" href="css/stylesheet.css">
     <link rel="stylesheet" href="css/foundation.css">
     <script type="text/javascript" src="js/modal.js"></script>
-    <script type="text/javascript"src="js/threads.js"></script>
+    <script type="text/javascript" src="js/threads.js"></script>
 </head>
 <body>
     <?php

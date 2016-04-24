@@ -1,9 +1,9 @@
+<?php
+include $_SERVER["DOCUMENT_ROOT"] . 'mummel/config/messages.php';
+?>
+
 <div class="modal-login">
   <form id="login_form" action="" method="post" onsubmit="return false">
-
-    <button id="login" class="switch-modal" type="button" name="button">Logga in</button>
-    <button id="register" class="switch-modal" type="button" name="button">Registrera</button>
-    <br>
 
     <div class="row column log-in-form">
 

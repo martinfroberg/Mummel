@@ -12,7 +12,7 @@ include 'filter.php'; ?>
             echo '<h3>' . $threads[$i]['title'] . '</h3>';
             echo '<p> url: ' . $threads[$i]['url'] . '</p>';
             echo '<p> text: ' . $threads[$i]['text'] . '</p>';?>
-            <a class="button"><?php echo COMMENTS; ?></a> <?php
+            <a class="comments-btn"><?php echo COMMENTS; ?></a> <?php
             echo '</div>';
         endfor;
     endif;  ?>

@@ -1,26 +1,25 @@
 .dim-background {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: auto;
-  width: auto;
-  background-color: #000;
-  opacity: 0.6;
-  z-index: 1001;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: auto;
+    width: auto;
+    background-color: #000;
+    opacity: 0.6;
+    z-index: 1001;
 }
-.modal-login, .modal-register {
-  z-index: 1002;
-  opacity: 1;
-  position: absolute;
-  box-shadow: 10px 10px 5px #888888;
-  border: 1px solid #000;
-  display: none;
-  background-color: #FFF;
+.modal {
+    z-index: 1002;
+    position: fixed;
+    box-shadow: 10px 10px 5px #888888;
+    border: 1px solid #000;
+    /*display: none;*/
+    background-color: #FFF;
 }
 
-#login_response, #registration_response{
+#login_response, #registration_response {
     display: none;
 }
 
@@ -131,7 +130,7 @@
 }
 
 .comments-container {
-  background-color: #FFF;
+    background-color: #FFF;
 }
 
 .row{

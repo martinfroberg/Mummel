@@ -1,6 +1,6 @@
 $(document).ready(function(){
   //Open comments
-    $('.threads-container').on('click','.thread a',function(){
+    $('.threads-container').on('click','.thread .comments-btn',function(){
         var id = $(this).parent().attr('id');
 
         $.ajax({ url: 'includes/threads/comments.php',

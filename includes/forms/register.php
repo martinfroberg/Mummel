@@ -1,9 +1,10 @@
-<div class="modal-register">
-    <!-- Switch buttons -->
-    <button id="login" class="switch-modal" type="button" name="button">Logga in</button>
-    <button id="register" class="switch-modal" type="button" name="button">Registrera</button>
-    <br>
+<?php
+include $_SERVER["DOCUMENT_ROOT"] . 'mummel/config/messages.php';
+?>
 
+
+<div class="modal-register">
+    
     <!-- Form -->
     <form id="registration_form" action="" method="post" onsubmit="return false">
         <label>Email:</label>

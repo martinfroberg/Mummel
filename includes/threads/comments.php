@@ -8,8 +8,18 @@ if (isset($_POST['get_thread_comments'])){
     if ($comments === false) {
         echo SELECT_FROM_DATABASE_FAILURE;
     } else {
-        echo '<a id="reply" class="open-modal">Reply to thread</a>';
+        if(verify_session($mysqli) == true){
+            //User logged in, show reply to thread button
+            echo '<a id="reply" class="open-modal">Reply to thread</a>';
+
+        } else {
+            //User not logged in
+            //TODO hide button? Grey button?
+        }
+
         echo '<br>';
+
+        
         if (! $children = find_child_comments(0, $comments)){
             echo NO_COMMENTS;
         } else {

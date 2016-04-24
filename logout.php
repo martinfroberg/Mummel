@@ -1,4 +1,5 @@
 <?php
+//Logout code
 
 session_start();
 // Unset all session values

@@ -1,6 +1,9 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . 'mummel/functions/init.php';
 
+
+//Add comment(if proper form as been submitted)
+//TODO Error handling/Invalid comment requirements
 if (isset($_POST['user_id'], $_POST['thread_id'], $_POST['parent_id'] , $_POST['text'])){
     $user_id = $_POST['user_id'];
     $thread_id = $_POST['thread_id'];

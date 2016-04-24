@@ -2,6 +2,9 @@
 require_ONCE $_SERVER["DOCUMENT_ROOT"] . 'mummel/config/messages.php';
 require_once $_SERVER["DOCUMENT_ROOT"] . 'mummel/database/connect.php';
 
+
+//Check if user can be registered and register them if successful
+//Return error message, or 'TRUE' if successfull to javascript
 if (isset($_POST['email'], $_POST['password'])) {
     $password = $_POST['password'];
     //Check valid email.
@@ -24,6 +27,7 @@ if (isset($_POST['email'], $_POST['password'])) {
     }
 }
 
+//Check if email is valid, false if invalid, return email on success
 function valid_email($email)
 {
     // Sanitize and validate the data passed in
@@ -38,6 +42,7 @@ function valid_email($email)
     }
 }
 
+//Check if email is already in database(true/false)
 function email_exists($email, $mysqli)
 {
     $stmt = $mysqli->prepare('SELECT id FROM users WHERE email = ? LIMIT 1');
@@ -57,6 +62,8 @@ function email_exists($email, $mysqli)
     }
 }
 
+//Check if password is correct length(true/false)
+//TODO Other password requirements?
 function password_length($password){
     if (count($password) >= 6){
         return true;
@@ -65,6 +72,7 @@ function password_length($password){
     }
 }
 
+//Register user in database(true/false)
 function register_user($email, $password, $mysqli)
 {
     // Create hashed password

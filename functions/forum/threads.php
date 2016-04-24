@@ -1,5 +1,7 @@
 <?php
 
+//Get top voted threads from database, returns and assoc array
+//TODO make thread voting system
 function get_top_threads($mysqli){
     //Get threads
     $stmt = $mysqli->prepare("SELECT * FROM threads ORDER BY id ASC");
@@ -19,12 +21,4 @@ function get_top_threads($mysqli){
     } else {
         return false;
     }
-}
-
-function create_thread($mysqli){
-
-}
-
-function delete_thread($user_id, $mysqli){
-
 }

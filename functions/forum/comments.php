@@ -1,5 +1,6 @@
 <?php
 
+//Get comments for a specific thread, returns an assoc array
 function get_thread_comments($thread_id, $mysqli){
     $thread_id = preg_replace("/[^0-9]/", '', $thread_id);
     $comments = array();
@@ -22,6 +23,7 @@ function get_thread_comments($thread_id, $mysqli){
     }
 }
 
+//Find children for a comment id, returns array if found, else false
 function find_child_comments($id, $array){
     $children = array();
     for ($i=0; $i < count($array); $i++) {

@@ -2,6 +2,8 @@
 require_once $_SERVER["DOCUMENT_ROOT"] . 'mummel/functions/init.php';
 require_once $_SERVER["DOCUMENT_ROOT"] . 'mummel/functions/sec/checkbrute.php';
 
+
+//Check if valid user and log them in(start new session)
 if (isset($_POST['email'], $_POST['password'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];

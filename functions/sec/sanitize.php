@@ -1,5 +1,6 @@
 <?php
 
+//Remove injections and commands, return correct url
 function esc_url($url)
 {
     if ('' == $url) {

@@ -2,6 +2,7 @@
 require_once $_SERVER["DOCUMENT_ROOT"] . 'mummel/functions/init.php';
 require_once $_SERVER["DOCUMENT_ROOT"] . 'mummel/functions/forum/comments.php';
 
+//Get array from functions
 if (isset($_POST['get_thread_comments'])){
     $comments = get_thread_comments($_POST['get_thread_comments'], $mysqli);
     if ($comments === false) {
@@ -19,6 +20,7 @@ if (isset($_POST['get_thread_comments'])){
     echo INVALID_POST_REQUEST;
 }
 
+//Comment display function
 function print_comments($parent_id, $array){
     $children = find_child_comments($parent_id,$array);
     if(! empty($children)){

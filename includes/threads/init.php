@@ -1,7 +1,10 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"] . 'mummel/functions/forum/threads.php';
+//TODO Display filter here?
 include 'filter.php'; ?>
 
+
+<!-- Make readable topics for index -->
 <div class="threads-container">
     <?php
     if (! $threads = get_top_threads($mysqli)) :

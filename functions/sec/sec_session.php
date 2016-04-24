@@ -1,7 +1,8 @@
 <?php
-
 require_once $_SERVER["DOCUMENT_ROOT"] . 'mummel/config/sessions.php';
 
+
+//Start a secure session
 function sec_session_start()
 {
     // Forces sessions to only use cookies.

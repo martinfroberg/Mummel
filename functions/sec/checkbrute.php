@@ -1,5 +1,7 @@
 <?php
 
+//Check user-tried-to-login attempts with database
+//TODO remove/change system?
 function checkbrute($user_id, $mysqli)
 {
     // Get timestamp of current time.

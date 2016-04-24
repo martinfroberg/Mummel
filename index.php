@@ -10,6 +10,7 @@ require_once 'functions/init.php' ?>
     <link rel="stylesheet" href="css/stylesheet.css">
     <script type="text/javascript" src="js/modal.js"></script>
     <script type="text/javascript" src="js/threads.js"></script>
+    <script type="text/javascript" src="js/comments.js"></script>
 </head>
 <body>
     <?php

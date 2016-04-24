@@ -1,6 +1,5 @@
 $(document).ready(function(){
     //Login AJAX
-
     $(document).on('submit', '#login_form', function(){
         $.ajax({
             type: "POST",
@@ -47,7 +46,8 @@ $(document).ready(function(){
     });
 
     //Reply AJAX
-    $(document).on('submit', '#reply_form', function(){
+    $(document).on('submit', '#reply_form', function(e){
+        e.preventDefault();
 
         var thread_id = $('#reply_form').closest('.thread').attr('id');
         var parent_id = 0;
@@ -69,7 +69,8 @@ $(document).ready(function(){
                 $(document).ajaxComplete(function(event, request, settnings){
                     if (msg == 'TRUE') {
                         //Success
-                        //TODO Update comment-container instead of refresh
+
+                        //TODO refresh javascript
                         location.reload(true);
                     } else {
                         //Failure

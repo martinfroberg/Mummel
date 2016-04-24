@@ -13,6 +13,7 @@ $(document).ready(function(){
                         location.reload(true);
                     } else {
                         //Failure, wrong password?
+                        //TODO Error handling?
                         $('#login_response').show();
                         $('#login_response').css("color", "RED");
                         $('#login_response').html(msg);
@@ -35,6 +36,7 @@ $(document).ready(function(){
                         location.reload(true);
                     } else {
                         //Failure
+                        //TODO Error handling?
                         $('#registration_response').show();
                         $('#registration_response').css("color", "RED");
                         $('#registration_response').html(msg);
@@ -67,6 +69,7 @@ $(document).ready(function(){
                 $(document).ajaxComplete(function(event, request, settnings){
                     if (msg == 'TRUE') {
                         //Success
+                        //TODO Update comment-container instead of refresh
                         location.reload(true);
                     } else {
                         //Failure

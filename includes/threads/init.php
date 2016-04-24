@@ -1,7 +1,5 @@
 <?php
-require_once $_SERVER["DOCUMENT_ROOT"] . 'mummel/functions/forum/threads.php';
-//TODO Display filter here?
-include 'filter.php'; ?>
+require_once $_SERVER["DOCUMENT_ROOT"] . 'mummel/functions/forum/threads.php'; ?>
 
 
 <!-- Make readable topics for index -->

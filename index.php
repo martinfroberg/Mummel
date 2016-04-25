@@ -9,7 +9,6 @@ require_once 'functions/init.php' ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <link rel="stylesheet" href="css/stylesheet.css">
     <script type="text/javascript" src="js/modal.js"></script>
-    <script type="text/javascript" src="js/threads.js"></script>
     <script type="text/javascript" src="js/comments.js"></script>
 </head>
 <body>

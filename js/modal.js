@@ -5,7 +5,7 @@ $(document).ready(function() {
         $(e.target).parent().append('<div class="modal" />');
 
         //load modal with correct form(by id)
-        $('.modal').load("includes/forms/" + e.target.id + '.php');
+        $('.modal').load('includes/forms/' + e.target.id + '.php');
 
         //Get AJAX scripts for forms
         $.getScript('js/form_submit.js');

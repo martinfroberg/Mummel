@@ -1,4 +1,2 @@
-
-Logged in as <?php echo htmlentities($_SESSION['email']); ?>
-
-<a href="/mummel/logout.php">Log out</a>
+<?php echo htmlentities($_SESSION['email']); ?>
+<a href="/mummel/logout.php"><?php echo LOGOUT; ?></a>

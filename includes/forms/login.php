@@ -2,21 +2,17 @@
 include $_SERVER["DOCUMENT_ROOT"] . 'mummel/config/messages.php';
 ?>
 
-<div class="modal-login">
-    <form id="login_form" action="" method="post" onsubmit="return false">
-        
-        <label><?php echo EMAIL ?></label>
-        <input type="text" name="email" placeholder="<?php echo EMAIL; ?>" />
+<form id="login_form" action="" method="post" onsubmit="return false">
 
-        <label><?php echo PASSWORD; ?></label>
-        <input type="text" name="password" placeholder="<?php echo PASSWORD; ?>" />
+    <label><?php echo EMAIL ?></label>
+    <input type="text" name="email" placeholder="<?php echo EMAIL; ?>" />
 
-        <input type="submit" value="<?php echo LOGIN; ?>" />
+    <label><?php echo PASSWORD; ?></label>
+    <input type="text" name="password" placeholder="<?php echo PASSWORD; ?>" />
 
-        <!-- Better error handling? -->
-        <p id="login_response"></p>
-
-        <a class="close-modal" style="cursor: pointer"><?php echo CLOSE; ?></a>
-    </div>
+    <input type="submit" value="<?php echo LOGIN; ?>" />
 </form>
-</div>
+
+<!-- Better error handling? -->
+<p id="login_response"></p>
+<button class="close-modal" style="cursor: pointer"><?php echo CLOSE; ?></button>

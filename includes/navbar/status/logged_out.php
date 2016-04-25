@@ -1,2 +1,2 @@
-<a id="login" class="open-modal" type="button"><?php echo LOGIN; ?></a>
-<a id="register" class="open-modal" type="button"><?php echo REGISTER; ?></a>
+<button id="login" class="open-modal"><?php echo LOGIN; ?></button>
+<button id="register" class="open-modal"><?php echo REGISTER; ?></button>

@@ -1,6 +1,8 @@
 $(document).ready(function(){
     //Login AJAX
-    $(document).on('submit', '#login_form', function(){
+    $(document).on('submit', '#login_form', function(e) {
+        //´´$('#login_form').submit(function(e)) {
+        e.preventDefault();
         $.ajax({
             type: "POST",
             url: "./functions/login/login.php",
@@ -9,6 +11,7 @@ $(document).ready(function(){
                 $(document).ajaxComplete(function(event, request, settnings) {
                     if (msg == 'TRUE') {
                         //Success
+
                         location.reload(true);
                     } else {
                         //Failure, wrong password?
@@ -20,10 +23,13 @@ $(document).ready(function(){
                 });
             }
         });
+        return false;
     });
 
     //Register AJAX
-    $(document).on('submit', '#registration_form', function(){
+    $(document).on('submit', '#registration_form', function(e){
+        //$('#registration_form').unbind('submit').bind('submit', function(e)) {
+        e.preventDefault();
         $.ajax({
             type: "POST",
             url: "./functions/login/register.php",
@@ -43,10 +49,38 @@ $(document).ready(function(){
                 });
             }
         });
+        return false;
+    });
+
+    //Create thread AJAX
+    $(document).on('submit', '#new_thread_form', function(e){
+        //$('#new_thread_form').unbind('submit').bind('submit', function(e)) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "./functions/forum/threads.php",
+            data: $('#new_thread_form').serialize(),
+            success: function(msg) {
+                $(document).ajaxComplete(function(event, request, settnings){
+                    if (msg == 'TRUE') {
+                        //Success
+
+                        //TODO Update thread-container insead of reload
+                        location.reload(true);
+                    } else {
+                        //Failure
+                        //TODO Error handling?
+                        alert(msg);
+                    }
+                });
+            }
+        });
+        return false;
     });
 
     //Reply AJAX
     $(document).on('submit', '#reply_form', function(e){
+        //$('#reply_form').unbind('submit').bind('submit', function(e)) {
         e.preventDefault();
 
         var thread_id = $('#reply_form').closest('.thread').attr('id');
@@ -70,7 +104,7 @@ $(document).ready(function(){
                     if (msg == 'TRUE') {
                         //Success
 
-                        //TODO refresh javascript
+                        //TODO Update comment-container instead of reload
                         location.reload(true);
                     } else {
                         //Failure
@@ -80,5 +114,7 @@ $(document).ready(function(){
                 });
             }
         });
+        return false;
     });
+
 });

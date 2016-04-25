@@ -10,7 +10,7 @@ if (isset($_POST['get_thread_comments'])){
     } else {
         if(verify_session($mysqli) == true){
             //User logged in, show reply to thread button
-            echo '<a id="reply" class="open-modal">Reply to thread</a>';
+            echo '<button id="reply" class="open-modal">' . NEW_THREAD_COMMENT . '</button>';
             echo '<br>';
         } else {
             //User not logged in

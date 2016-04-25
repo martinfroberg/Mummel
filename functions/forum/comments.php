@@ -11,7 +11,7 @@ if (isset($_POST['user_id'], $_POST['thread_id'], $_POST['parent_id'] , $_POST['
 
     // Insert comment into database
     if ($insert_stmt = $mysqli->prepare('INSERT INTO comments (user_id, thread_id, parent_id, text) VALUES (?, ?, ?, ?)')) {
-        $insert_stmt->bind_param('ssss', $user_id, $thread_id, $parent_id, $text);
+        $insert_stmt->bind_param('iiis', $user_id, $thread_id, $parent_id, $text);
         // Execute the prepared query.
         if (!$insert_stmt->execute()) {
             echo "NOPE";

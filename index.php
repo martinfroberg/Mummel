@@ -24,6 +24,12 @@ require_once 'functions/init.php' ?>
     <?php
     include 'includes/navbar/init.php'; ?>
 
-    <?php include 'includes/threads/init.php'; ?>
+  <div class="container">
+    <div class="row">
+      <div class="twelve.columns">
+     <?php include 'includes/threads/init.php'; ?>
+   </div>
+</div>
+  </div>
 </body>
 </html>

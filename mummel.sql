@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.7.1
+-- version 4.5.4.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 17, 2016 at 06:09 PM
--- Server version: 5.6.20-log
--- PHP Version: 5.5.15
+-- Generation Time: May 05, 2016 at 03:59 PM
+-- Server version: 5.7.11
+-- PHP Version: 5.6.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `mummel`
@@ -26,17 +26,20 @@ SET time_zone = "+00:00";
 -- Table structure for table `categories`
 --
 
-CREATE TABLE IF NOT EXISTS `categories` (
-`id` int(10) unsigned NOT NULL,
-  `name` varchar(25) COLLATE utf8_swedish_ci NOT NULL
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=2 ;
+CREATE TABLE `categories` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(25) COLLATE utf8_swedish_ci NOT NULL,
+  `color` varchar(6) COLLATE utf8_swedish_ci NOT NULL DEFAULT 'A0A0A0' COMMENT 'Thread colour'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
 --
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id`, `name`) VALUES
-(1, 'TestCategory');
+INSERT INTO `categories` (`id`, `name`, `color`) VALUES
+(1, 'TestCategory', 'FF0000'),
+(2, 'TestCategory2', '00FF00'),
+(3, 'TestCategory3', '0000FF');
 
 -- --------------------------------------------------------
 
@@ -44,20 +47,20 @@ INSERT INTO `categories` (`id`, `name`) VALUES
 -- Table structure for table `comments`
 --
 
-CREATE TABLE IF NOT EXISTS `comments` (
-`id` int(10) unsigned NOT NULL,
-  `user_id` int(10) unsigned NOT NULL COMMENT 'Poster',
-  `thread_id` int(10) unsigned NOT NULL,
-  `parent_id` int(10) unsigned NOT NULL DEFAULT '0',
+CREATE TABLE `comments` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL COMMENT 'Poster',
+  `thread_id` int(10) UNSIGNED NOT NULL,
+  `parent_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `text` text COLLATE utf8_swedish_ci NOT NULL
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=10 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
 --
 -- Dumping data for table `comments`
 --
 
 INSERT INTO `comments` (`id`, `user_id`, `thread_id`, `parent_id`, `text`) VALUES
-(1, 1, 1, 0, 'Test comment number 1;'),
+(1, 1, 1, 0, 'Test comment number 1'),
 (2, 1, 1, 1, 'This should be a child comment of comment number 1.'),
 (3, 1, 3, 0, 'Test comment.'),
 (4, 1, 1, 2, 'Child-child-comment.'),
@@ -65,7 +68,20 @@ INSERT INTO `comments` (`id`, `user_id`, `thread_id`, `parent_id`, `text`) VALUE
 (6, 1, 1, 0, 'Comment 6 or somthing.'),
 (7, 1, 1, 5, 'Mmmmmmm.'),
 (8, 1, 1, 4, 'CAN I DO THIS?'),
-(9, 1, 1, 7, 'Bananas comment.');
+(9, 1, 1, 7, 'Bananas comment.'),
+(70, 1, 1, 0, 'asd'),
+(69, 1, 4, 0, 'asdasd'),
+(68, 1, 1, 0, 'Test'),
+(67, 1, 1, 0, 'qweqwe'),
+(66, 1, 3, 0, 'QWE'),
+(65, 1, 3, 0, 'qweqwe'),
+(64, 1, 2, 0, 'qweqwezx'),
+(63, 1, 1, 0, 'qweqweasd'),
+(62, 1, 1, 0, 'qwe'),
+(61, 1, 2, 0, 'asd'),
+(60, 1, 2, 0, 'qweqwe'),
+(59, 1, 3, 0, 'Test Comment 2\r\n'),
+(58, 1, 2, 0, 'Test comment\r\n');
 
 -- --------------------------------------------------------
 
@@ -73,8 +89,8 @@ INSERT INTO `comments` (`id`, `user_id`, `thread_id`, `parent_id`, `text`) VALUE
 -- Table structure for table `login_attempts`
 --
 
-CREATE TABLE IF NOT EXISTS `login_attempts` (
-  `user_id` int(10) unsigned NOT NULL,
+CREATE TABLE `login_attempts` (
+  `user_id` int(10) UNSIGNED NOT NULL,
   `time` varchar(30) COLLATE utf8_swedish_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
@@ -84,14 +100,14 @@ CREATE TABLE IF NOT EXISTS `login_attempts` (
 -- Table structure for table `threads`
 --
 
-CREATE TABLE IF NOT EXISTS `threads` (
-`id` int(10) unsigned NOT NULL,
-  `category_id` int(10) unsigned NOT NULL,
-  `user_id` int(10) unsigned NOT NULL COMMENT 'Poster',
+CREATE TABLE `threads` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `category_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL COMMENT 'Poster',
   `url` text COLLATE utf8_swedish_ci,
   `title` text COLLATE utf8_swedish_ci NOT NULL,
   `text` text COLLATE utf8_swedish_ci
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
 --
 -- Dumping data for table `threads`
@@ -99,8 +115,9 @@ CREATE TABLE IF NOT EXISTS `threads` (
 
 INSERT INTO `threads` (`id`, `category_id`, `user_id`, `url`, `title`, `text`) VALUES
 (1, 1, 1, NULL, 'Test thread', 'This is a test thread with 2 comments.'),
-(2, 1, 1, NULL, 'Test thread without comments.', 'This is a test thread without comments.'),
-(3, 1, 1, NULL, 'This is the third test thread.', 'This thread has 1 comment.');
+(2, 2, 1, NULL, 'Test thread without comments.', 'This is a test thread without comments.'),
+(3, 1, 1, NULL, 'This is the third test thread.', 'This thread has 1 comment.'),
+(4, 3, 1, '', 'qwe', 'qwe');
 
 -- --------------------------------------------------------
 
@@ -108,11 +125,11 @@ INSERT INTO `threads` (`id`, `category_id`, `user_id`, `url`, `title`, `text`) V
 -- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
-`id` int(10) unsigned NOT NULL,
+CREATE TABLE `users` (
+  `id` int(10) UNSIGNED NOT NULL,
   `email` varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `password_hash` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
 --
 -- Dumping data for table `users`
@@ -129,25 +146,26 @@ INSERT INTO `users` (`id`, `email`, `password_hash`) VALUES
 -- Indexes for table `categories`
 --
 ALTER TABLE `categories`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `comments`
 --
 ALTER TABLE `comments`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `threads`
 --
 ALTER TABLE `threads`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
- ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `email` (`email`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -157,22 +175,22 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 --
 -- AUTO_INCREMENT for table `threads`
 --
 ALTER TABLE `threads`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

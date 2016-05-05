@@ -106,6 +106,7 @@ $(document).ready(function(){
 
                         //TODO Update comment-container instead of reload
                         location.reload(true);
+                        //refreshComments(thread_id);
                     } else {
                         //Failure
                         //TODO vettigt fel medelande

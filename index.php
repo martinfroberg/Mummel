@@ -24,6 +24,8 @@ require_once 'functions/init.php' ?>
     <?php
     include 'includes/navbar/init.php'; ?>
 
+
     <?php include 'includes/threads/init.php'; ?>
+
 </body>
 </html>

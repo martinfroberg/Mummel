@@ -9,14 +9,51 @@ if(isset($_POST['category_id'], $_POST['user_id'], $_POST['title'], $_POST['text
     $text = $_POST['text'];
 
     // Insert comment into database
-    if ($insert_stmt = $mysqli->prepare('INSERT INTO threads (category_id, user_id, title, url, text) VALUES (?, ?, ?, ?, ?)')) {
-        $insert_stmt->bind_param('iisss', $category_id, $user_id, $title, $url, $text);
-        // Execute the prepared query.
-        if (!$insert_stmt->execute()) {
-            echo "NOPE";
+    if ($stmt = $mysqli->prepare('INSERT INTO threads (category_id, user_id, title, url, text) VALUES (?, ?, ?, ?, ?)')) {
+        if ($stmt->bind_param('iisss', $category_id, $user_id, $title, $url, $text)){
+            //Successfully bound parameters
+
+            // Execute the prepared query.
+            if ($stmt->execute()) {
+                //Success
+
+                echo "TRUE";
+
+            } else {
+                //Insert thread execution statement failed
+
+                //Devolopment
+                echo INSERT_THREAD_QUERY_EXECUTION_ERROR;
+                exit();
+
+                //Production
+                //error_reporting(0);
+                //header("Location: error.php");
+                //exit();
+            }
         } else {
-            echo "TRUE";
+            //Failed to bound parameters
+
+            //Devolopment
+            echo INSERT_THREAD_QUERY_PARAMETERS_ERROR;
+            exit();
+
+            //Production
+            //error_reporting(0);
+            //header("Location: error.php");
+            //exit();
         }
+    } else {
+        //Couldnt prepare statement
+
+        //Devolopment
+        echo INSERT_THREAD_QUERY_ERROR;
+        exit();
+
+        //Production
+        //error_reporting(0);
+        //header("Location: error.php");
+        //exit();
     }
 }
 
@@ -25,21 +62,57 @@ if(isset($_POST['category_id'], $_POST['user_id'], $_POST['title'], $_POST['text
 //TODO make thread voting system
 function getTopThreads($mysqli){
     //Get threads
-    $stmt = $mysqli->prepare("SELECT * FROM threads ORDER BY id ASC");
-    if ($stmt){
-        //$stmt->bind_param('s', 'threads');
-        $stmt->execute();
-        //get statement result into $result
-        $result = $stmt->get_result();
+    if ($stmt = $mysqli->prepare("SELECT * FROM threads ORDER BY id ASC")){
+        //Succesfully prepared statement
+        if ($stmt->execute()){
+            //Successfully executed statement
 
-        //Get each row into $data
-        while ($data = $result->fetch_assoc()){
-            //Store whole assoc
-            $threads[] = $data;
+            //get statement result into $result
+             if ($result = $stmt->get_result()){
+                 //Successfully retrived result
+
+                 //Get each row into $data
+                 while ($data = $result->fetch_assoc()){
+                     //Store whole assoc
+                     $threads[] = $data;
+                 }
+
+                 //Success
+                 return $threads;
+             } else {
+                 //Failed to get result from executed statement
+
+                 //Devolopment
+                 echo GET_COMMENTS_QUERY_RESULT_ERROR;
+                 exit();
+
+                 //Production
+                 //error_reporting(0);
+                 //header("Location: error.php");
+                 //exit();
+             }
+        } else {
+            //Failed to execute statement
+
+            //Devolopment
+            echo GET_COMMENTS_QUERY_EXECUTION_ERROR;
+            exit();
+
+            //Production
+            //error_reporting(0);
+            //header("Location: error.php");
+            //exit();
         }
-        //Return threads
-        return $threads;
     } else {
-        return false;
+        //Failed to prepare statement
+
+        //Devolopment
+        echo GET_COMMENTS_QUERY_ERROR;;
+        exit();
+
+        //Production
+        //error_reporting(0);
+        //header("Location: error.php");
+        //exit();
     }
 }

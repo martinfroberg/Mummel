@@ -2,7 +2,10 @@ $(document).ready(function() {
     //Open Modal.
     $(document).on('click', '.open-modal', function(e){
         $('body').append('<div class="dim-background" />');
-        $(e.target).parent().append('<div class="modal" />');
+        //TODO MODAL PLACEMENT
+        //$(e.target).parent().append('<div class="modal" />');
+
+        $('body').prepend('<div class="modal" />');
 
         //load modal with correct form(by id)
         $('.modal').load('includes/forms/' + e.target.id + '.php');

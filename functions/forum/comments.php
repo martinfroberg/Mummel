@@ -10,14 +10,43 @@ if (isset($_POST['user_id'], $_POST['thread_id'], $_POST['parent_id'] , $_POST['
     $text = $_POST['text'];
 
     // Insert comment into database
-    if ($insert_stmt = $mysqli->prepare('INSERT INTO comments (user_id, thread_id, parent_id, text) VALUES (?, ?, ?, ?)')) {
-        $insert_stmt->bind_param('iiis', $user_id, $thread_id, $parent_id, $text);
-        // Execute the prepared query.
-        if (!$insert_stmt->execute()) {
-            echo "NOPE";
+    if ($stmt = $mysqli->prepare('INSERT INTO comments (user_id, thread_id, parent_id, text) VALUES (?, ?, ?, ?)')) {
+        if ($stmt->bind_param('iiis', $user_id, $thread_id, $parent_id, $text)){
+            // Execute the prepared query.
+            if ($stmt->execute()) {
+                //Success
+
+                //Echo true back to AJAX code
+                echo "TRUE";
+
+            } else {
+                //Insert comment query cannot be executed
+
+                //Devolopment
+                echo INSERT_COMMENT_QUERY_EXECUTION_ERROR;
+                exit();
+
+                //Production
+                //error_reporting(0);
+                //header("Location: error.php");
+                //exit();
+            }
+
         } else {
-            echo "TRUE";
+            //Cannot bind parameters
+
+            //Devolopment
+            echo INSERT_COMMENT_QUERY_PARAMETERS_ERROR;
+            exit();
+
+            //Production
+            //error_reporting(0);
+            //header("Location: error.php");
+            //exit();
         }
+    } else {
+        //Insert comment statement is not correct
+        echo INSERT_COMMENT_QUERY_ERROR;
     }
 }
 
@@ -27,21 +56,73 @@ function get_thread_comments($thread_id, $mysqli){
     $thread_id = preg_replace("/[^0-9]/", '', $thread_id);
     $comments = array();
 
-    $stmt = $mysqli->prepare("SELECT * FROM comments WHERE thread_id = ? ORDER BY parent_id ASC, id ASC");
-    if ($stmt){
-        $stmt->bind_param('s', $thread_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
+    // Insert comment into database
+    if ($stmt = $mysqli->prepare("SELECT * FROM comments WHERE thread_id = ? ORDER BY parent_id ASC, id ASC")) {
+        if ($stmt->bind_param('s', $thread_id)){
+            //Successfully bound parameters
 
-        //Get each row into $data
-        while ($data = $result->fetch_assoc()){
-            //Store whole assoc
-            $comments[] = $data;
+            // Execute the prepared query.
+            if ($stmt->execute()) {
+                //Succesfully executed
+
+                if ($result = $stmt->get_result()){
+                    //Result stored
+
+                    //Get each row into $data
+                    while ($data = $result->fetch_assoc()){
+                        //Store whole assoc
+                        $comments[] = $data;
+                    }
+
+                    //Success
+                    return $comments;
+                } else {
+                    //Couldnt retrieve result
+
+                    //Devolopment
+                    echo GET_COMMENTS_QUERY_RESULT_ERROR;
+                    exit();
+
+                    //Production
+                    //error_reporting(0);
+                    //header("Location: error.php");
+                    //exit();
+                }
+            } else {
+                //Statement couldnt be executed
+
+                //Devolopment
+                echo GET_COMMENTS_QUERY_EXECUTION_ERROR;
+                exit();
+
+                //Production
+                //error_reporting(0);
+                //header("Location: error.php");
+                //exit();
+            }
+        } else {
+            //Couldnt bind parameters
+
+            //Devolopment
+            echo GET_COMMENTS_QUERY_PARAMETERS_ERROR;
+            exit();
+
+            //Production
+            //error_reporting(0);
+            //header("Location: error.php");
+            //exit();
         }
-        //Return comments.
-        return $comments;
     } else {
-        return false;
+        //Statement is not correct
+
+        //Devolopment
+        echo GET_COMMENTS_QUERY_ERROR;
+        exit();
+
+        //Production
+        //error_reporting(0);
+        //header("Location: error.php");
+        //exit();
     }
 }
 

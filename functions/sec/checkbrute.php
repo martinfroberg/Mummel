@@ -2,8 +2,7 @@
 
 //Check user-tried-to-login attempts with database
 //TODO remove/change system?
-function checkbrute($user_id, $mysqli)
-{
+function checkbrute($user_id, $mysqli) {
     // Get timestamp of current time.
     $now = time();
 
@@ -11,17 +10,70 @@ function checkbrute($user_id, $mysqli)
     $valid_attempts = $now - (2 * 60 * 60);
 
     if ($stmt = $mysqli->prepare("SELECT time FROM login_attempts WHERE user_id = ? AND time > '$valid_attempts'")) {
-        $stmt->bind_param('i', $user_id);
+        //Successfully prepared statement
+        if ($stmt->bind_param('i', $user_id)){
+            //Successfully bound parameters
+            if ($stmt->execute()){
+                //Successfully executed statement
+                if($stmt->store_result()){
+                    //Succesfully stored results
 
-        // Execute the prepared query.
-        $stmt->execute();
-        $stmt->store_result();
+                    // If there have been more than 5 failed logins
+                    if ($stmt->num_rows > 5) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    //Failed to store results
 
-        // If there have been more than 5 failed logins
-        if ($stmt->num_rows > 5) {
-            return true;
+                    //Devolopment
+                    echo BRUTE_FORCE_QUERY_RESULT_ERROR;
+                    exit();
+
+                    //Production
+                    //error_reporting(0);
+                    //header("Location: error.php");
+                    //exit();
+                }
+            } else {
+                //Failed to execute statement
+
+                //Devolopment
+                echo BRUTE_FORCE_QUERY_EXECUTION_ERROR;
+                exit();
+
+                //Production
+                //error_reporting(0);
+                //header("Location: error.php");
+                //exit();
+            }
         } else {
-            return false;
+            //Failed to bind parameters
+
+            //Devolopment
+            echo BRUTE_FORCE_QUERY_PARAMETERS_ERROR;
+            exit();
+
+            //Production
+            //error_reporting(0);
+            //header("Location: error.php");
+            //exit();
         }
+    } else {
+        //Prepare statement failure
+
+        //Devolopment
+        echo BRUTE_FORCE_QUERY_ERROR;
+        exit();
+
+        //Production
+        //error_reporting(0);
+        //header("Location: error.php");
+        //exit();
     }
 }
+
+define('BRUTE_FORCE_QUERY_EXECUTION_ERROR','ngt fel');
+define('BRUTE_FORCE_QUERY_PARAMETERS_ERROR','ngt fel');
+define('BRUTE_FORCE_QUERY_ERROR','ngt fel');

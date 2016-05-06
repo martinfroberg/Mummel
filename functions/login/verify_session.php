@@ -2,8 +2,7 @@
 
 
 //Is user logged in?(true/false)
-function verify_session($mysqli)
-{
+function verify_session($mysqli) {
     //Check to see if all parameters are entered.
     if (isset($_SESSION['user_id'], $_SESSION['email'], $_SESSION['login_string'])) {
         $user_id = $_SESSION['user_id'];

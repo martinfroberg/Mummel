@@ -2,19 +2,47 @@
 require_once $_SERVER["DOCUMENT_ROOT"] . 'mummel/database/connect.php';
 
 if(!isset($categories)){
-    $stmt = $mysqli->prepare("SELECT * FROM categories");
-    if($stmt){
-        $stmt->execute();
-        $result = $stmt->get_result();
+    if ($stmt = $mysqli->prepare("SELECT * FROM categories")){
+        if ($stmt->execute()){
+            //Success
 
-        while($data = $result->fetch_assoc()){
-            $categories[] = $data;
+            if ($result = $stmt->get_result()){
+                while($data = $result->fetch_assoc()){
+                    $categories[] = $data;
+                }
+
+                //Make categories global for easy access
+                global $categories;
+            } else {
+                //Couldnt retrieve results
+
+                //Devolopment
+                echo GET_CATEGORIES_QUERY_RESULT_ERROR;
+                exit();
+
+                //Production
+                //error_reporting(0);
+                //header("Location: error.php");
+                //exit();
+            }
+        } else {
+            //Devolopment
+            echo GET_CATEGORIES_QUERY_EXECUTION_ERROR;
+            exit();
+
+            //Production
+            //error_reporting(0);
+            //header("Location: error.php");
+            //exit();
         }
-
-        global $categories;
     } else {
+        //Devolopment
+        echo GET_CATEGORIES_QUERY_ERROR;
+        exit();
 
-        //ERROR HANDLING -- CANNOT GET CATEGORIES FROM DATABASE
-        return false;
+        //Production
+        //error_reporting(0);
+        //header("Location: error.php");
+        //exit();
     }
 }

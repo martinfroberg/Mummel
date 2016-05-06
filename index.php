@@ -1,5 +1,5 @@
 <?php
-require_once 'functions/init.php' ?>
+require_once 'functions/init.php'; ?>
 
 <!DOCTYPE html>
 <html>
@@ -14,25 +14,7 @@ require_once 'functions/init.php' ?>
     <script type="text/javascript" src="js/comments.js"></script>
 </head>
 <body>
-
-
-
-
-
-
-
-    <?php
-    include 'includes/navbar/init.php'; ?>
-
-  <div class="container">
-    <div class="row">
-      <div class="twelve.columns">
-     <?php include 'includes/threads/init.php'; ?>
-   </div>
-</div>
-  </div>
-
-  
-
+    <?php include 'includes/navbar/init.php'; ?>
+    <?php include 'includes/threads/init.php'; ?>
 </body>
 </html>

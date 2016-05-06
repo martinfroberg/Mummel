@@ -7,7 +7,7 @@ include $_SERVER["DOCUMENT_ROOT"] . 'mummel/functions/forum/threads.php';
 
 
     <select name="category_id">
-        <?php $categories = getCategories($mysqli);
+        <?php
         foreach($categories as $option) {
             echo '<option value"' . $option['id'] . '">' . $option['name'] . '</option>';
         } ?>

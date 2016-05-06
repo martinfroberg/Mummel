@@ -73,7 +73,3 @@ function checkbrute($user_id, $mysqli) {
         //exit();
     }
 }
-
-define('BRUTE_FORCE_QUERY_EXECUTION_ERROR','ngt fel');
-define('BRUTE_FORCE_QUERY_PARAMETERS_ERROR','ngt fel');
-define('BRUTE_FORCE_QUERY_ERROR','ngt fel');

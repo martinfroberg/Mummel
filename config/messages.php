@@ -75,9 +75,20 @@ define('LOGIN_QUERY_EXECUTION_ERROR','ngt fel');
 define('LOGIN_QUERY_PARAMETERS_ERROR','ngt fel');
 define('LOGIN_QUERY_ERROR','ngt fel');
 
+define('REGISTER_QUERY_EXECUTION_ERROR','ngt fel');
+define('REGISTER_QUERY_PARAMETERS_ERROR','ngt fel');
+define('REGISTER_QUERY_ERROR','ngt fel');
+
+define('EMAIL_EXISTS_RESULT_ERROR','ngt fel');
+define('EMAIL_EXISTS_QUERY_EXECUTION_ERROR','ngt fel');
+define('EMAIL_EXISTS_QUERY_PARAMETERS_ERROR','ngt fel');
+define('EMAIL_EXISTS_QUERY_ERROR','ngt fel');
+
 define('BRUTE_FORCE_QUERY_EXECUTION_ERROR','ngt fel');
 define('BRUTE_FORCE_QUERY_PARAMETERS_ERROR','ngt fel');
 define('BRUTE_FORCE_QUERY_ERROR','ngt fel');
+
+
 
 //Database
 define('DATABASE_CONNECTION_ERROR','Kan inte får kontakt med databasen.');

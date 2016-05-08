@@ -19,13 +19,13 @@ if (isset($_POST['email'], $_POST['password'])) {
             } else {
                 if (register_user($email, $password, $mysqli)) {
                     echo 'TRUE';
-                } else {
-                    echo INSERT_INTO_DATABASE_FAILURE;
                 }
             }
         }
     }
 }
+
+if
 
 //Check if email is valid, false if invalid, return email on success
 function valid_email($email)
@@ -43,22 +43,70 @@ function valid_email($email)
 }
 
 //Check if email is already in database(true/false)
-function email_exists($email, $mysqli)
-{
-    $stmt = $mysqli->prepare('SELECT id FROM users WHERE email = ? LIMIT 1');
+function email_exists($email, $mysqli) {
+    if ($stmt = $mysqli->prepare('SELECT id FROM users WHERE email = ? LIMIT 1')){
+        //Prepare statement success
+        if($stmt->bind_param('s', $email)){
+            //Parameters successfully bound
+            if ($stmt->execute()){
+                //Executed successfully
+                if($stmt->store_results()){
+                    //Store results successfully
+                    if ($stmt->num_rows == 1) {
+                        // Email exists in database.
+                        return true;
+                    } else {
+                        //Email doesnt exist.
+                        return false;
+                    }
+                } else {
+                    //Failed to store results
 
-    if ($stmt) {
-        $stmt->bind_param('s', $email);
-        $stmt->execute();
-        $stmt->store_result();
+                    //Devolopment
+                    echo EMAIL_EXISTS_RESULT_ERROR;
+                    exit();
 
-        if ($stmt->num_rows == 1) {
-            // Email exists in database.
-            return true;
+                    //Production
+                    //error_reporting(0);
+                    //header("Location: error.php");
+                    //exit();
+                }
+            } else {
+                //Execution failed
+
+                //Devolopment
+                echo EMAIL_EXISTS_QUERY_EXECUTION_ERROR;
+                exit();
+
+                //Production
+                //error_reporting(0);
+                //header("Location: error.php");
+                //exit();
+            }
         } else {
-            //Email doesnt exist.
-            return false;
+            //Parameters bind failure
+
+            //Devolopment
+            echo EMAIL_EXISTS_QUERY_PARAMETERS_ERROR;
+            exit();
+
+            //Production
+            //error_reporting(0);
+            //header("Location: error.php");
+            //exit();
         }
+
+    } else {
+        //Prepare statement failure
+
+        //Devolopment
+        echo EMAIL_EXISTS_QUERY_ERROR;
+        exit();
+
+        //Production
+        //error_reporting(0);
+        //header("Location: error.php");
+        //exit();
     }
 }
 
@@ -73,18 +121,53 @@ function password_length($password){
 }
 
 //Register user in database(true/false)
-function register_user($email, $password, $mysqli)
-{
+function register_user($email, $password, $mysqli) {
     // Create hashed password
     $password = password_hash($password, PASSWORD_DEFAULT);
-    // Insert the new user into the database
-    if ($insert_stmt = $mysqli->prepare('INSERT INTO users (email, password_hash) VALUES (?, ?)')) {
-        $insert_stmt->bind_param('ss', $email, $password);
-        // Execute the prepared query.
-        if (!$insert_stmt->execute()) {
-            return false;
+
+    if ($stmt = $mysqli->prepare('INSERT INTO users (email, password_hash) VALUES (?, ?)')){
+        //Successfully prepared
+        if ($stmt->bind_param('ss', $email, $password)){
+            //Successfully bound parameters
+
+            if($stmt->execute()){
+                //Successfully executed
+                return true;
+            } else {
+                //Failed to execute
+                //return false;
+
+                //Devolopment
+                echo EMAIL_EXISTS_QUERY_ERROR;
+                exit();
+
+                //Production
+                //error_reporting(0);
+                //header("Location: error.php");
+                //exit();
+            }
         } else {
-            return true;
+            //Failed to bind parameters
+
+            //Devolopment
+            echo EMAIL_EXISTS_QUERY_ERROR;
+            exit();
+
+            //Production
+            //error_reporting(0);
+            //header("Location: error.php");
+            //exit();
         }
+    } else {
+        //Failed to prepare
+
+        //Devolopment
+        echo EMAIL_EXISTS_QUERY_ERROR;
+        exit();
+
+        //Production
+        //error_reporting(0);
+        //header("Location: error.php");
+        //exit();
     }
 }

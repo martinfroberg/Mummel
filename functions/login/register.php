@@ -25,8 +25,6 @@ if (isset($_POST['email'], $_POST['password'])) {
     }
 }
 
-if
-
 //Check if email is valid, false if invalid, return email on success
 function valid_email($email)
 {
@@ -138,7 +136,7 @@ function register_user($email, $password, $mysqli) {
                 //return false;
 
                 //Devolopment
-                echo EMAIL_EXISTS_QUERY_ERROR;
+                echo REGISTER_QUERY_EXECUTION_ERROR;
                 exit();
 
                 //Production
@@ -150,7 +148,7 @@ function register_user($email, $password, $mysqli) {
             //Failed to bind parameters
 
             //Devolopment
-            echo EMAIL_EXISTS_QUERY_ERROR;
+            echo REGISTER_QUERY_PARAMETERS_ERROR;
             exit();
 
             //Production
@@ -162,7 +160,7 @@ function register_user($email, $password, $mysqli) {
         //Failed to prepare
 
         //Devolopment
-        echo EMAIL_EXISTS_QUERY_ERROR;
+        echo REGISTER_QUERY_ERROR;
         exit();
 
         //Production

@@ -48,7 +48,7 @@ function email_exists($email, $mysqli) {
             //Parameters successfully bound
             if ($stmt->execute()){
                 //Executed successfully
-                if($stmt->store_results()){
+                if($stmt->store_result()){
                     //Store results successfully
                     if ($stmt->num_rows == 1) {
                         // Email exists in database.

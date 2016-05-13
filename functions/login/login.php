@@ -19,6 +19,8 @@ if (isset($_POST['email'], $_POST['password'])) {
                 if($result = $stmt->get_result()){
                     //Successfully retrieved result
 
+                    $user = [];
+
                     //Get each row into $data
                     while ($data = $result->fetch_assoc()){
                         //Store whole assoc

@@ -48,17 +48,22 @@
 {
   height: 70px;
   background-color: #333;
+
+}
+.mummel
+{
+  margin-left: 10px;
+  padding-top: 10px;
+  position: absolute;
   color: white;
 }
+
 .navbarlo button
 {
   background-color: white;
-
-
-
-}
-.buttons
-{
-  padding-right: 10px;
+  border-color: black;
+  float: right;
+  margin-right: 10px;
+  margin-top: 15px;
 
 }

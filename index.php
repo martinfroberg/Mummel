@@ -1,5 +1,6 @@
 <?php
-require_once 'functions/init.php'; ?>
+require_once 'functions/init.php';
+require_once 'functions/login/autologin.php'; ?>
 
 <!DOCTYPE html>
 <html>

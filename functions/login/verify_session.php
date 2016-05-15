@@ -1,6 +1,5 @@
 <?php
 
-
 //Is user logged in?(true/false)
 function verify_session($mysqli) {
     //Check to see if all parameters are entered.

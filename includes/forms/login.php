@@ -10,6 +10,9 @@ include $_SERVER["DOCUMENT_ROOT"] . 'mummel/config/messages.php';
     <label><?php echo PASSWORD; ?></label>
     <input type="text" name="password" placeholder="<?php echo PASSWORD; ?>" />
 
+    <br>
+    <input type="checkbox" name="autologin" value="1"> <?php echo REMEMBER_ME ?> />
+
     <input type="submit" value="<?php echo LOGIN; ?>" />
 </form>
 

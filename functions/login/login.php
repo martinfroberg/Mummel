@@ -8,8 +8,79 @@ if (isset($_POST['email'], $_POST['password'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
+
+    login($email, $password, $mysqli);
+    //If "remember me" was checked, make a autologin cookie
+    if (isset($_POST['autologin'])){
+        $token = hash('sha512', uniqid());
+
+        if ($stmt = $mysqli->prepare('UPDATE users SET auth_token = ? WHERE id = ?')){
+            //Successfully prepared
+            if ($stmt->bind_param('si', $token, $_SESSION['user_id'])){
+                //Successfully bound
+                if ($stmt->execute()){
+                    //Successfully executed
+                } else {
+                    //Failed to execute
+
+                    //Devolopment
+                    echo UPDATE_AUTH_TOKEN_QUERY_EXECUTION_ERROR;
+                    exit();
+
+                    //Production
+                    //error_reporting(0);
+                    //header("Location: error.php");
+                    //exit();
+                }
+            } else {
+                //Failed to bind parameters
+
+                //Devolopment
+                echo UPDATE_AUTH_TOKEN_QUERY_PARAMETERS_ERROR;
+                exit();
+
+                //Production
+                //error_reporting(0);
+                //header("Location: error.php");
+                //exit();
+            }
+        } else {
+            //Failed to prepare
+
+            //Devolopment
+            echo UPDATE_AUTH_TOKEN_QUERY_ERROR;
+            exit();
+
+            //Production
+            //error_reporting(0);
+            //header("Location: error.php");
+            //exit();
+        }
+
+        $value = 'user_id=' . $_SESSION['user_id'] . '&email=' . $_SESSION['email'] . '&token=' . $token;
+
+        setcookie('mummel_auth', $value, time()+60*60*24*30, '/'); //30 Days cookie
+    }
+}
+
+function createSession($user_id, $email){
+    // XSS protection as we might print this value
+    $user_id = preg_replace('/[^0-9]+/', '', $user_id);
+    $_SESSION['user_id'] = $user_id;
+
+    $_SESSION['email'] = filter_var($email, FILTER_VALIDATE_EMAIL);
+
+    // Get the ip of the user.
+    $user_ip = $_SERVER['REMOTE_ADDR'];
+    // Get the user-agent string of the user.
+    $user_browser = $_SERVER['HTTP_USER_AGENT'];
+    //Set session st ring to ip + browser
+    $_SESSION['login_string'] = $user_ip . $user_browser;
+}
+
+function login($email, $password, $mysqli){
     // Using prepared statements means that SQL injection is not possible.
-    if ($stmt = $mysqli->prepare("SELECT id, password_hash FROM users WHERE email = ? LIMIT 1")){
+    if ($stmt = $mysqli->prepare("SELECT id, password_hash FROM users WHERE email = ?")){
         //Successfully prepared statement
         if ($stmt->bind_param('s', $email)){
             //Successfully bound parameters
@@ -39,21 +110,10 @@ if (isset($_POST['email'], $_POST['password'])) {
                             if (password_verify($password, $db_password)) {
                                 // Password is correct!
 
-                                // XSS protection as we might print this value
-                                $user_id = preg_replace('/[^0-9]+/', '', $user_id);
-                                $_SESSION['user_id'] = $user_id;
-
-                                $_SESSION['email'] = filter_var($email, FILTER_VALIDATE_EMAIL);
-
-                                // Get the ip of the user.
-                                $user_ip = $_SERVER['REMOTE_ADDR'];
-                                // Get the user-agent string of the user.
-                                $user_browser = $_SERVER['HTTP_USER_AGENT'];
-                                //Set session st ring to ip + browser
-                                $_SESSION['login_string'] = $user_ip . $user_browser;
-
+                                createSession($user_id, $email);
                                 //Login successful
                                 echo 'TRUE';
+
                             } else {
                                 // Password is not correct
                                 // We record this attempt in the database

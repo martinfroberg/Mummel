@@ -8,7 +8,7 @@ include $_SERVER["DOCUMENT_ROOT"] . 'mummel/config/messages.php';
     <input type="text" name="email" placeholder="<?php echo EMAIL; ?>" />
 
     <label><?php echo PASSWORD; ?></label>
-    <input pattern=".{3,60}" required title="3 to 60 characters" type="text" name="password" placeholder="<?php echo PASSWORD; ?>" />
+    <input type="text" name="password" placeholder="<?php echo PASSWORD; ?>" />
 
     <br>
     <input type="checkbox" name="autologin" value="1"> <?php echo REMEMBER_ME ?></input>

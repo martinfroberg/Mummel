@@ -12,7 +12,7 @@
 }
 .modal {
     z-index: 1002;
-    position: fixed;
+    position:fixed;
     box-shadow: 10px 10px 5px #888888;
     border: 1px solid #000;
     /*display: none;*/
@@ -66,4 +66,23 @@
   margin-right: 10px;
   margin-top: 15px;
 
+}
+.navbarli
+{
+  height: 70px;
+  background-color: #333;
+}
+.loggedinname
+{
+  color: white;
+  margin-right: 50px;
+  position: absolute;
+
+}
+.navbarli button
+{
+  background-color: white;
+  float: right;
+  margin-top: 15px;
+  margin-right: 10px;
 }

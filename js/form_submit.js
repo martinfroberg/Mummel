@@ -19,6 +19,9 @@ $(document).ready(function(){
                         $('#login_response').show();
                         $('#login_response').css("color", "RED");
                         $('#login_response').html(msg);
+
+                        //Remove previously typed password to prevent spam
+                        $('input[name=password]').val('');
                     }
                 });
             }

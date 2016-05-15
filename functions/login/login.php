@@ -120,7 +120,7 @@ function login($email, $password, $mysqli){
                                 $now = time();
                                 if ($stmt = $mysqli->prepare("INSERT INTO login_attempts (user_id, time) VALUES (?,?)")){
                                     //Successfully prepared
-                                    if ($stmt->bind_param('ss', $user_id, $now)){
+                                    if ($stmt->bind_param('is', $user_id, $now)){
                                         //Successfully bound parameters
                                         if ($stmt->execute()){
                                             //Successfully executed

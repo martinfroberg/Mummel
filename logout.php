@@ -4,7 +4,6 @@ require_once 'functions/login/autologin.php';
 
 //Remove autologin cookie
 if (isset($_COOKIE['mummel_auth'])){
-    unset($_COOKIE['mummel_auth']);
     setcookie('mummel_auth','', time() - 3600, '/');
 }
 

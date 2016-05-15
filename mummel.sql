@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 05, 2016 at 03:59 PM
+-- Generation Time: May 15, 2016 at 06:29 PM
 -- Server version: 5.7.11
 -- PHP Version: 5.6.18
 
@@ -68,20 +68,7 @@ INSERT INTO `comments` (`id`, `user_id`, `thread_id`, `parent_id`, `text`) VALUE
 (6, 1, 1, 0, 'Comment 6 or somthing.'),
 (7, 1, 1, 5, 'Mmmmmmm.'),
 (8, 1, 1, 4, 'CAN I DO THIS?'),
-(9, 1, 1, 7, 'Bananas comment.'),
-(70, 1, 1, 0, 'asd'),
-(69, 1, 4, 0, 'asdasd'),
-(68, 1, 1, 0, 'Test'),
-(67, 1, 1, 0, 'qweqwe'),
-(66, 1, 3, 0, 'QWE'),
-(65, 1, 3, 0, 'qweqwe'),
-(64, 1, 2, 0, 'qweqwezx'),
-(63, 1, 1, 0, 'qweqweasd'),
-(62, 1, 1, 0, 'qwe'),
-(61, 1, 2, 0, 'asd'),
-(60, 1, 2, 0, 'qweqwe'),
-(59, 1, 3, 0, 'Test Comment 2\r\n'),
-(58, 1, 2, 0, 'Test comment\r\n');
+(9, 1, 1, 7, 'Bananas comment.');
 
 -- --------------------------------------------------------
 
@@ -116,8 +103,7 @@ CREATE TABLE `threads` (
 INSERT INTO `threads` (`id`, `category_id`, `user_id`, `url`, `title`, `text`) VALUES
 (1, 1, 1, NULL, 'Test thread', 'This is a test thread with 2 comments.'),
 (2, 2, 1, NULL, 'Test thread without comments.', 'This is a test thread without comments.'),
-(3, 1, 1, NULL, 'This is the third test thread.', 'This thread has 1 comment.'),
-(4, 3, 1, '', 'qwe', 'qwe');
+(3, 1, 1, NULL, 'This is the third test thread.', 'This thread has 1 comment.');
 
 -- --------------------------------------------------------
 
@@ -128,15 +114,16 @@ INSERT INTO `threads` (`id`, `category_id`, `user_id`, `url`, `title`, `text`) V
 CREATE TABLE `users` (
   `id` int(10) UNSIGNED NOT NULL,
   `email` varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `password_hash` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL
+  `password_hash` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `auth_token` varchar(128) COLLATE utf8_swedish_ci DEFAULT NULL COMMENT 'Authentication token for persistent cookie(autologin)'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password_hash`) VALUES
-(1, 'test@test.test', '$2y$10$DcSMQdbrcSt9ki9RilzGIeXutIyu3AtfMWnbJoLG3oSTX.fS8HvT2');
+INSERT INTO `users` (`id`, `email`, `password_hash`, `auth_token`) VALUES
+(1, 'test@test.test', '$2y$10$DcSMQdbrcSt9ki9RilzGIeXutIyu3AtfMWnbJoLG3oSTX.fS8HvT2', NULL);
 
 --
 -- Indexes for dumped tables
@@ -180,17 +167,17 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 --
 -- AUTO_INCREMENT for table `threads`
 --
 ALTER TABLE `threads`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

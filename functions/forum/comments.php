@@ -31,7 +31,6 @@ if (isset($_POST['user_id'], $_POST['thread_id'], $_POST['parent_id'] , $_POST['
                 //header("Location: error.php");
                 //exit();
             }
-
         } else {
             //Cannot bind parameters
 
@@ -46,19 +45,28 @@ if (isset($_POST['user_id'], $_POST['thread_id'], $_POST['parent_id'] , $_POST['
         }
     } else {
         //Insert comment statement is not correct
+
+        //Devolopment
         echo INSERT_COMMENT_QUERY_ERROR;
+        exit();
+
+        //Production
+        //error_reporting(0);
+        //header("Location: error.php");
+        //exit();
     }
 }
 
 
 //Get comments for a specific thread, returns an assoc array
 function get_thread_comments($thread_id, $mysqli){
-    $thread_id = preg_replace("/[^0-9]/", '', $thread_id);
-    $comments = array();
+    //TODO Is this needed?
+    //$thread_id = preg_replace("/[^0-9]/", '', $thread_id);
+    $comments = [];
 
     // Insert comment into database
     if ($stmt = $mysqli->prepare("SELECT * FROM comments WHERE thread_id = ? ORDER BY parent_id ASC, id ASC")) {
-        if ($stmt->bind_param('s', $thread_id)){
+        if ($stmt->bind_param('i', $thread_id)){
             //Successfully bound parameters
 
             // Execute the prepared query.

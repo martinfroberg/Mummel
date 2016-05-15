@@ -5,7 +5,7 @@ $(document).ready(function() {
         //TODO MODAL PLACEMENT
         //$(e.target).parent().append('<div class="modal" />');
 
-        $('body').prepend('<div class="modal" />');
+        $(this).after('<div class="modal" />');
 
         //load modal with correct form(by id)
         $('.modal').load('includes/forms/' + e.target.id + '.php');

@@ -17,6 +17,11 @@
     border: 1px solid #000;
     /*display: none;*/
     background-color: #FFF;
+
+    /* FIX THIS */
+    top: 50%;
+    left: 50%;
+    transoform: translate(-50%, -50%);
 }
 
 #login_response, #registration_response {

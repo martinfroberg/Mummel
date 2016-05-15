@@ -6,7 +6,6 @@ $(document).ready(function(){
 });
 
 function displayComments(thread_id){
-
     $.ajax({ url: 'includes/threads/comments.php',
     data:  {get_thread_comments: thread_id},
     type: 'POST',
@@ -14,7 +13,7 @@ function displayComments(thread_id){
         if( $('#' + thread_id + '.comments-container').length ){
             $('#' + thread_id + '.comments-container').remove();
         } else {
-            $('#' + thread_id).append("<div id='" + thread_id + "' class='comments-container'></div>");
+            $('#' + thread_id + '.thread').append("<div id='" + thread_id + "' class='comments-container'></div>");
             $('#' + thread_id + '.comments-container').html(comments);
         }
     }});

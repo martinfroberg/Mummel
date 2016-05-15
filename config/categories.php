@@ -5,7 +5,6 @@ if(!isset($categories)){
     if ($stmt = $mysqli->prepare("SELECT * FROM categories")){
         if ($stmt->execute()){
             //Success
-
             if ($result = $stmt->get_result()){
                 while($data = $result->fetch_assoc()){
                     $categories[] = $data;

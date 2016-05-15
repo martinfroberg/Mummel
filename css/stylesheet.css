@@ -72,3 +72,22 @@
   margin-top: 15px;
 
 }
+.navbarli
+{
+  height: 70px;
+  background-color: #333;
+}
+.loggedinname
+{
+  color: white;
+  margin-right: 50px;
+  position: absolute;
+
+}
+.navbarli button
+{
+  background-color: white;
+  float: right;
+  margin-top: 15px;
+  margin-right: 10px;
+}

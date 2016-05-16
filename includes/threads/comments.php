@@ -33,9 +33,26 @@ function print_comments($parent_id, $array){
     if(! empty($children)){
         echo '<ul>';
         for ($i=0; $i < count($children); $i++) {
-            echo '<li id="' . $parent_id . '">' . $array[$children[0]]['text'] . '</li>';
+            echo '<li>';
+            echo '<div class="comment">';
+            echo '<p  class="comment-timestamp">' . $array[$children[0]]['creation_time'] . '</p>';
+            echo '<p>' . $array[$children[0]]['text'] . '</p>';
+            echo '</div>';
+            echo '</li>';
+            echo '<hr>';
+
+            //echo '<li id="' . $parent_id . '">' . $array[$children[0]]['text'] . '</li>';
 
             print_comments($array[$children[0]]['id'], $array);
+
+
+
+
+
+
+
+
+
 
             unset($array[$children[0]]);
             $array = array_values($array);

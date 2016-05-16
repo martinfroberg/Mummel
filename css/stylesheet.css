@@ -49,6 +49,19 @@
 .comments-container {
     background-color: #FFF;
 }
+
+.comments-container ul {
+    list-style-type: none;
+}
+
+.comment p {
+    font-size: small;
+}
+
+.comment .comment-timestamp {
+    font-size: xx-small;
+}
+
 .navbarlo
 {
   height: 70px;
